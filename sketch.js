@@ -6,6 +6,7 @@ var thunder, thunder1, thunder2, thunder3, thunder4
 var engine, world;
 var maxDrops = 100;
 var drops = [];
+var thunderCreatedFrame=0;
 
 function preload(){
     thunder1 = loadImage("images/thunderbolt/1.png")
@@ -29,6 +30,11 @@ function setup(){
 function draw(){
     background(0)
     Engine.update(engine)
+
+    if(thunderCreatedFrame + 10 ===frameCount && thunder){
+        thunder.destroy();
+    }
+
     var rand = Math.round(random(1,4))
     if(frameCount%50 === 0){
         thunder = createSprite(random(10,370), random(10,30), 10, 10)
@@ -46,6 +52,8 @@ function draw(){
     umbrella.display();
     for(var i = 0; i<maxDrops; i++){
         drops[i].display()
+        drops[i].updateY
     }
+    drawSprites()
 }   
 
